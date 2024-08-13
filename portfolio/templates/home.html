@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block homeactive %}active{% endblock homeactive %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <title>Home</title>
+    </div>
+
+    <div class="container my-3">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" id="carouselImage1" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" id="carouselImage2" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" id="carouselImage3" alt="...">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="container my-3">
+      <h2 class="text-center my-3 py-3">Me at a glance!</h2>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" id="cardImage1" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Developer</h5>
+              <p class="card-text">Passionate developer dedicated to crafting innovative solutions with cutting-edge technologies. I thrive on challenges and am committed to delivering high-quality code.</p>
+              <a href="https://www.linkedin.com/in/robindfernandes/" class="btn btn-primary">Click For Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" id="cardImage2" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Application Specialist</h5>
+              <p class="card-text">Versatile software applications specialist adept at analyzing complex requirements and translating them into practical solutions.</p>
+              <a href="https://www.linkedin.com/in/robindfernandes/" class="btn btn-primary">Click For Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" id="cardImage3" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Computer Geek</h5>
+              <p class="card-text">Tech-savvy computer geek with a knack for turning complex concepts into practical solutions with a blend of creativity and analytical thinking.</p>
+              <a href="https://www.linkedin.com/in/robindfernandes/" class="btn btn-primary">Click For Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-dark text-light position-relative fixed-bottom">
+      <p class="text-center py-3 my-0">
+        Copyright &copy; 2024 | All rights reserved
+      </p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script>
+      const apiKey = 'zWKt8Bp27sD7MUeDxBbTDuwqAOzMI3eKHqHw23UNNMrcNhwZBcCKveWj'; // Replace with your Pexels API key
+      const query = 'coding tech html JavaScript programming webdesign';
+      const perPage = 6; // Number of images to fetch
+
+      fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=${perPage}`, {
+        headers: {
+          Authorization: apiKey
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Update carousel images
+        const carouselImages = document.querySelectorAll('.carousel-item img');
+        for (let i = 0; i < carouselImages.length; i++) {
+          carouselImages[i].src = data.photos[i].src.medium; // Adjust size as needed
+          carouselImages[i].alt = data.photos[i].alt_description;
+        }
+
+        // Update card images
+        const cardImages = document.querySelectorAll('.card-img-top');
+        for (let i = 0; i < cardImages.length; i++) {
+          cardImages[i].src = data.photos[i].src.medium; // Adjust size as needed
+          cardImages[i].alt = data.photos[i].alt_description;
+        }
+      })
+      .catch(error => console.error('Error fetching images:', error));
+    </script>
+  </body>
+</html>
+{% endblock body %}
